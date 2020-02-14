@@ -1,0 +1,1 @@
+The total amount of CO@ Emission that are in my sample is <function CO2_Emissions at 0x7fb636e85f80>.
