@@ -15,9 +15,9 @@ def np_from_csv(csv_file):
    	 data = tmp_data.to_numpy()
    	 return data
 #This function will import a CSV file as pandas stored in data and then converting that into numpy
-data= np_from_csv("Final-Project.csv") 
+data= np_from_csv("EEB C177 Revised Data Set .csv") 
 #Uploading data files for CO2 Emissions by Year
-df = pd.read_csv("Final-Project.csv", names=['Year', "Total CO2 Emissions", "Emissions from solid fuel comsumption" , "Emissions from liquid fuel consumption", "Emissions from gas fuel consumption", "Emissions from cement production", "Emissions from gas flaring", "Per capita CO2 emissions (metric tons of carbon)", "Emissions from bunker fuels (not included in the totals)"])
+df = pd.read_csv("EEB C177 Revised Data Set .csv", names=['Year', "Total CO2 Emissions", "Emissions from solid fuel comsumption" , "Emissions from liquid fuel consumption", "Emissions from gas fuel consumption", "Emissions from cement production", "Emissions from gas flaring", "Per capita CO2 emissions (metric tons of carbon)", "Emissions from bunker fuels (not included in the totals)"])
 #This code is going to define all the headers for each of my columns, making the code easier to understand and manipulate
 def plot_column__vs_column(str(x), str(y)):
     x=input( "What column would you like to compare as x value (exact name of column):")
@@ -36,7 +36,7 @@ def plot_column__vs_column(str(x), str(y)):
 #This helps improve my code prior because by adding headers, I can call entire columns to plot. 
 #This improves my code, because I will be able to visualize and compare multiple values to do analysis
 def total_CO2_emissions:
-	sum = csv.reader(open("Final-Project.csv","rb"))
+	sum = csv.reader(open("EEB C177 Revised Data Set .csv","rb"))
 	sum.next()
 	# to skip the header when doing the for loop 
 	total = 0
@@ -47,7 +47,7 @@ def total_CO2_emissions:
 		print total
 	#This for loop is also dynamic in that it will take any element value that corresponds with any row of the CSV file and add all of the values together
 	#This will help figure out different trends in data, such as hisotrically what has contributed most to CO2 Emissions depending on type of fuel
-with open('Final-Project.csv', mode = 'r', encoding = 'utf-8-sig') as csvfile:
+with open('EEB C177 Revised Data Set .csv', mode = 'r', encoding = 'utf-8-sig') as csvfile:
     reader = csv.DictReader(csvfile)
     occurrences = 0
     for row in reader:
@@ -57,14 +57,14 @@ with open('Final-Project.csv', mode = 'r', encoding = 'utf-8-sig') as csvfile:
 #Have based on the type of emissions. This will also help us understand historically what has affected CO2 emissions as certain columns will have
 #more data than others. 
 Years= set([])
-with open('Final-Project.csv', 'r') as csvfile: 
+with open('EEB C177 Revised Data Set .csv', 'r') as csvfile: 
     extracted = csv.DictReader(csvfile)
     for line in extracted:
         Year.add(line['Year'])
 
 yearcount = {} 
 import csv 
-with open('Final-Project.csv', 'r') as f: 
+with open('EEB C177 Revised Data Set .csv', 'r') as f: 
     my_csv = csv.DictReader(f)
     for line in my_csv:
         eachyear = line['year']
@@ -75,6 +75,18 @@ for year in Years:
 #This function will help us get all of the years present in our data as well as the number of data points that they have. This begins with 
 #a function that will take all of the years in the data set nad put them in a set. Next, the column year is counted and added together and printed.
 #This will give the total amount of data per each year.
+
+colnames = ['year', 'total_CO2', 'solid_fuel_consumption', 'lquid_fuel', 'gas_fuel', "cement_production", "gas_flaring", "per_capita", "bunker_fuels"]
+data = pandas.read_csv('EEB C177 Revised Data Set .csv', names=colnames)
+total_CO2_emissions.txt= data.total_CO2.tolist()
+solid_fuel_consumption.txt=data.solid_fuel_consumption.tolist()
+liquid_fuel_consumption.txt=data.liquid_fuel.tolist()
+gas_fuel_consumption.txt=data.gas_fuel.tolist()
+cement_fuel_consumption.txt=data.cement_production.tolist()
+gas_flaring.txt=data.gas_flaring.tolist()
+per_capita.txt=per_capita.tolist()
+bunker_fuels.txt=bunker_fuels.tolist()
+
 
 #Assert Conditions
 

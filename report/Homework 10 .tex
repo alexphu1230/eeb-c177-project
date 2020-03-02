@@ -1,0 +1,183 @@
+
+\documentclass[letterpaper]{article}
+\usepackage{times}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\setlength{\parskip}{1em}
+
+% to import images 
+\usepackage{graphicx}
+\graphicspath{ {Final Project} }
+
+% to format code
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% title page
+\title{EEB C177 Final Project}
+\author{Alexander Phu}
+\date{February 29, 2020}
+
+% begin the document
+\begin{document}
+
+\maketitle {}
+\section*{Abstract}
+CO2 Emissions in the United States are increasing each year. It is important that we monitor the release of CO2 Emissions as CO2 Emissions affect many health related risks. 
+
+\newpage
+\tableofcontents
+\listoffigures
+
+\newpage
+\section{Introduction}
+
+For this project, I am analyzing the CO2 Emissions of different fossil fuels from the United States in metric tons. This data is important to analyze because as CO2 emissions increase, there are increased health risks and issues that affect entire communities (Parshall et. al, 2009). Some of these health risks include increased cardiovascular disease, increased risk of asthma, and increased cancer risks (Gerber et. al, 2013). This makes this research also biologically relevant because if we can analyze the amount of CO2 that is in the air in a quantifiable way, we can create ways to reduce emissions in consumption of specific fossil fuels. 
+
+Present the issue: 
+	Understanding CO2 emissions from different fossil fuels from the United States. CO2 emissions has the potential to cause a variety of health defects in in the community. 
+
+Purpose: 
+	To assess historical trends between CO2 emissions and the type of fossil fuel used in the United States in order to track historical trends and create methods to improve fossil fuel use and consumption.
+	
+Methods:
+	Obtain data on the fossil fuel consumption separated by fossil fuel type that the United States used each year. 
+	
+Major Findings:
+	There is a trend that although fossil fuel consumption increases each year, it is not linear and certain fossil fuel types are used more depending on historical time period. 
+
+Biological Impact:
+	The use of fossil fuels creates pollutants and over time, we will reach the ecosystem threshold in which the ecosystem can sustain CO2 emissions.
+
+\section{Methods}
+
+\subsection{Importing the data file}
+
+Public data on CO2 Emissions from the United States found online in the form of a csv file. Data includes CO2 emissions from the beginning of the United States until 2018. The data also includes specific breakdowns of the type of gas emission fuel used.  A function was defined within a python script to open the csv file, import the data using the pandas library, and convert the data to a numpy file for future numerical analysis.
+\vspace{0.25cm}
+
+% Start code-block and define it as python
+\lstset{language=Python}
+\begin{lstlisting}[frame=single]  
+
+import pandas as pd
+import numpy as np
+
+def np_from_csv(csv_file):
+    temp_data = pd.read_csv(csv_file, header = None)
+    data = temp_data.to_numpy()
+    return data
+
+data = np_from_csv('EEB C177 Revised Data Set.csv')
+
+\end{lstlisting}
+
+\subsection{Analysis of the total amount of CO2 emitted by the United States in totality. }
+
+A function was defined to calculate the total CO2 emitted by the United States for any given category. Given an input of the column that would like analyzed, a for loop as well as a .split function is used to cut that specific data and then add the values of each data element in the column together. This is then outputted to give the total CO2 emission of a given fossil fuel type. 
+
+\vspace{0.25cm}
+
+\lstset{language=Python}
+\begin{lstlisting}[frame=single] 
+def total_CO2():
+    total=0
+    for line in open('EEB C177 Revised Data Set .csv'):
+        csv_row=line.split()
+        temprow=csv_row[0].split(",")
+        total += int(temprow[2])
+
+    print(total)
+    return total
+\end{lstlisting}
+
+A second function takes an input of the columns and compares the differences in CO2 emissions based on the columns given in the form of a plot. The plot function of the matplotlib.pyplot library is used to graph this relationship between the columns. 
+
+\vspace{0.25cm}
+
+\lstset{language=Python}
+\begin{lstlisting}[frame=single]
+import matplotlib.pyplot as plt
+
+def plot_column__vs_column(str(x), str(y)):
+    x=input( "What column would you like to compare as x value (exact name of column):")
+    y=input("What column would you like to compare as y value (exact name of column):")
+    plt.plot(str(x), str(y))
+    plt.axis([0, 12, 0, 100])
+    z= input("What is the name of the x axis:")
+    plt.xlabel(str(z))
+    w=input("What is the name of the y axis:")
+    plt.ylabel(str(w))
+    v=input("What is the name of the plot:")
+    plt.title(str(v))
+    plt.show()
+    return plot_column_vs_column (str(x), str(y)):
+    
+\end{lstlisting}
+
+A third function takes the csv file and will count the number of occurrences of years in the csv file. This will help determine the historical impact of CO2 Emissions. This function utilizes a for loop that will count the amount of occurrences in the csv file and store that count within a variable and print out the variable. 
+
+\lstset{language=Python}
+\begin{lstlisting}[frame=single]
+
+with open('EEB C177 Final Project .csv', mode = 'r', encoding = 'utf-8-sig') as csvfile:
+    reader = csv.DictReader(csvfile)
+    occurrences = 0
+    for row in reader:
+        occurrences = occurences +1
+    print('we have {} occurrences of values to a key.\n'.format(occurrences))
+
+\end{lstlisting}
+
+\subsection{Using Regex}
+
+A list reflecting the CO2 emissions in totality by year was created in order to gain a better sense of the total impact that the United States has on CO2 Emissions. The data set was imported as a txt file. The list was then analyzed to see where what the total value was in the list using regex functions. The re.findall function was used to analyze all of the integers in the list. 
+
+\lstset{language=Python}
+\begin{lstlisting}[frame=single]
+
+import csv
+import re
+
+def extractMax("total_CO2_Emisisons.txt"): 
+	numbers = re.findall ('\d+',input)
+	numbers = map(int,numbers) 
+	print max(numbers) 
+  
+if  max  == "__main__": 
+    extractMax("total_CO2_Emissions.txt")
+    
+\end{lstlisting}
+
+\section{Results}
+
+\section{Discussion}
+
+\section{References}
+
+\section{Figures}
+
+\end{document}
